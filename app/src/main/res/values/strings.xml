@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ShopifyMatch</string>
+    <string name="play">Play</string>
+    <string name="help">Help</string>
+    <string name="reset">Reset</string>
+    <string name="pairs_found">Pairs found</string>
+    <string name="pairs_left">Pairs left</string>
+</resources>
