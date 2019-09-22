@@ -2,8 +2,16 @@
     <string name="app_name">Shopify Match</string>
     <string name="play">Play</string>
     <string name="help">Help</string>
+    <string name="play_again">Play Again</string>
+    <string name="home">Home</string>
     <string name="reset">Reset</string>
+    <string name="close">Close</string>
     <string name="pairs_found">Pairs found</string>
     <string name="pairs_left">Pairs left</string>
     <string name="mismatch">Card mismatch. Try again.</string>
+    <string name="help_message">1. Select any two cards\n
+                                2. If they match, the cards will remain revealed\n
+                                3. If they don\'t match, the cards will flip back over\n
+                                4. Once you match 10 pairs, the game is over\n
+                                5. You can shuffle the cards anytime using the reset button</string>
 </resources>
