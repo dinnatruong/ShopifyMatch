@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -44,12 +43,7 @@ public class GameActivity extends AppCompatActivity implements MatchingCardAdapt
         // Initialize grid layout
         final RecyclerView recyclerView = findViewById(R.id.cardGrid);
         int numberOfColumns = 4;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        });
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
 
         cardMatchingViewModel = ViewModelProviders.of(this).get(CardMatchingViewModel.class);
 
@@ -89,19 +83,7 @@ public class GameActivity extends AppCompatActivity implements MatchingCardAdapt
 
     @Override
     public void onItemClick(View view, final int position) {
-
-        if (cardMatchingViewModel.isOnSecondCardSelected()) {
-
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    cardMatchingViewModel.selectCard(position);
-                }
-            }, 350);
-        } else {
-            cardMatchingViewModel.selectCard(position);
-        }
+        cardMatchingViewModel.selectCard(position);
     }
 
     @Override

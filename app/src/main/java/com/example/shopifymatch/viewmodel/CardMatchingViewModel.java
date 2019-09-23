@@ -3,6 +3,7 @@ package com.example.shopifymatch.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.os.Handler;
 import android.util.Log;
 
 import com.example.shopifymatch.data.model.Product;
@@ -39,10 +40,6 @@ public class CardMatchingViewModel extends ViewModel {
         return pairsLeft;
     }
 
-    public boolean isOnSecondCardSelected() {
-        return selectedCards.size() == 1;
-    }
-
     public void selectCard(int index) {
         ArrayList<Product> currentDeck = productCards.getValue();
 
@@ -61,9 +58,9 @@ public class CardMatchingViewModel extends ViewModel {
     private void checkMatch() {
         if (selectedCards.size() == 2) {
 
-            ArrayList<Product> currentDeck = productCards.getValue();
-            int firstSelectedCardIndex = selectedCards.get(0);
-            int secondSelectedCardIndex = selectedCards.get(1);
+            final ArrayList<Product> currentDeck = productCards.getValue();
+            final int firstSelectedCardIndex = selectedCards.get(0);
+            final int secondSelectedCardIndex = selectedCards.get(1);
 
             // Compare selected cards
             if (currentDeck.get(firstSelectedCardIndex).getId().equals(currentDeck.get(secondSelectedCardIndex).getId())) {
@@ -85,9 +82,15 @@ public class CardMatchingViewModel extends ViewModel {
             } else {
 
                 // Flip cards if pairs do not match
-                currentDeck.get(firstSelectedCardIndex).setFaceShown(false);
-                currentDeck.get(secondSelectedCardIndex).setFaceShown(false);
-                ((MutableLiveData<ArrayList<Product>>) productCards).setValue(currentDeck);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        currentDeck.get(firstSelectedCardIndex).setFaceShown(false);
+                        currentDeck.get(secondSelectedCardIndex).setFaceShown(false);
+                        ((MutableLiveData<ArrayList<Product>>) productCards).setValue(currentDeck);
+                    }
+                }, 400);
             }
 
             selectedCards.clear();
